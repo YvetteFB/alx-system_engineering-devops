@@ -1,1 +1,2 @@
-kj
+#!/bin/bash
+echo hello $USER
