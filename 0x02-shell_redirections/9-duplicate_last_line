@@ -1,2 +1,2 @@
 #!/bin/bash
-cast ./iacta | tail --lines=1 >> iacta
+echo -en "" | tail --lines=1 iacta >> iacta
