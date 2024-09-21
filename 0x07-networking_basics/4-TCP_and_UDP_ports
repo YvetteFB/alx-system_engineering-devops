@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Displaying listening ports with PID and Program name..."
+
+# Use 'ss' to show only listening sockets, including PID and program name
+ss -tulnmp | awk '{print $1, $5, $6, $7}' | column -t
