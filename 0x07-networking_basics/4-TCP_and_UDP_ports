@@ -1,31 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Displays listening ports. Includes listening sockets as well
+# + as the PID and name of the program to which each socket belongs.
 
-# Check if the script is run with root privileges
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run this script as root or with sudo."
-  exit 1
-fi
-
-# Print the header
-echo "Active Internet connections (only servers)"
-printf "%-6s %-9s %-9s %-23s %-23s %-11s %s\n" "Proto" "Recv-Q" "Send-Q" "Local Address" "Foreign Address" "State" "PID/Program name"
-
-# Use netstat to get listening sockets with program names and PIDs
-netstat -tlnp | awk '
-  NR > 2 {
-    proto = $1
-    recvq = $2
-    sendq = $3
-    local = $4
-    foreign = $5
-    state = $6
-    pidprogram = $7
-
-    # Pad the local and foreign address fields to 23 characters
-    if (length(local) < 23) local = sprintf("%-23s", local)
-    if (length(foreign) < 23) foreign = sprintf("%-23s", foreign)
-
-    printf "%-6s %-9s %-9s %-23s %-23s %-11s %s\n", proto, recvq, sendq, local, foreign, state, pidprogram
-  }
-'
-
+netstat -lp
